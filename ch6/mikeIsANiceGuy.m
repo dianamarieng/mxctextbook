@@ -1,4 +1,22 @@
 function stats = mikeIsANiceGuy(data)
+% checks inputs 
+% checks that data are numeric 
+if ~isa(data,'numeric')
+    help mikeIsANiceGuy 
+    error('Input must contain numbers!');
+end
+
+% check that the input is a vector 
+if sum(size(data)>1)>1
+    help mikeIsANiceGuy 
+    error('Data must be a vector!');
+end
+
+if length(data)<1
+    help mikeIsANiceGuy
+    error('Data must contain at least one element!')
+end
+
 meanval = myMean(data);
 medianval = median(data);
 minval = min(data);

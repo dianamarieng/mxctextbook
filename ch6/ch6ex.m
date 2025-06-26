@@ -95,3 +95,14 @@ rand_evens = evenNum(randperm(length(evenNum)));
 % string 
 
 %% 12 
+% strncmp compares between 2 strings and outputs a boolean based on whether
+% the character in the N index matches in both strings 
+
+%% 13
+% Displays the number of elements in the matrix
+mat13 = randn(5,5,5);
+disp(numel(mat13)) 
+disp(prod(size(mat13)))
+
+%% 14
+% A semi-colon!

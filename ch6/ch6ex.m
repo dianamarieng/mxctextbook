@@ -1,0 +1,51 @@
+% 6.14 Exercises 
+% 1, 
+%% 1 FLAG
+for i = 1:3
+zmat = zeros((round(max(randn(30,1)))));
+disp(size(zmat))
+end
+% zmat gets progressively smaller as it is used repeatedly?
+
+%% 2
+N = 14; 
+randnums = rand(N,2);
+rn_size = size(randnums);
+zeromat1 = zeros(rn_size(1),1);
+disp(zeromat1)
+
+% Goal: Compress the previous lines into 1 line of code 
+N = 14;
+zeromat2 = zeros(size(rand(N,2),1),1);
+disp(zeromat2)
+
+%% 3
+% Use the function sort instead of max to write a 
+% function that finds the maximum value of an input vector
+function maxElementSort = findMaxElementSort(vector)
+sortedArray = sort(vector); 
+maxElementSort = sortedArray(end);
+disp(maxElementSort)
+end
+
+a = [2 4 9 8 10 79];
+findMaxElementSort(a);
+
+%% 4 FLAG
+% Write code to find all instances of the maximum value 
+% in some vector inputs 
+function [maxNumber, maxIndices] = findMaxElements(vector)
+maxNumber = max(vector); % finds the max number
+maxIndices = find(vector == maxNumber); % finds the indices with the max number
+disp([num2str(maxNumber) ' is found in indices ' num2str(maxIndices)]) % how to concatenate spaces with commas?
+end
+
+b = [2 4 9 8 10 79 79 79];
+findMaxElements(b);
+
+%% 5 SKIP COME BACK AFTER 6.10
+
+%% 6 
+% Generate a random number from a uniform distribution and test 
+% whether that value is greater than 0.5 
+% See file compareToHalf in the ch6 folder

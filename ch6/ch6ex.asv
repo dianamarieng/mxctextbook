@@ -37,8 +37,50 @@ findMaxElementSort(a);
 function [maxNumber, maxIndices] = findMaxElements(vector)
 maxNumber = max(vector); % finds the max number
 maxIndices = find(vector == maxNumber); % finds the indices with the max number
-disp([num2str(maxNumber) ' is found in indices ' num2str(maxIndices)])
+disp([num2str(maxNumber) ' is found in indices ' num2str(maxIndices)]) % how to concatenate spaces with commas?
 end
 
 b = [2 4 9 8 10 79 79 79];
 findMaxElements(b);
+
+%% 5 SKIP COME BACK AFTER 6.10
+
+%% 6 
+% Generate a random number from a uniform distribution and test 
+% whether that value is greater than 0.5 
+% See file compareToHalf in the ch6 folder
+
+%% 7 
+% Generate a 4x3x2 matrix of normally distributed random numbers 
+mat1 = randn(4,3,2);
+% shows a number of matrices corresponding to the z-dimension, matching
+% with the same number of rows and columns in the x and y dimension
+% Computing the mean across dimensions 
+meanrow = mean(mat1,1); % 1 indicates row
+meancol = mean(mat1,2); % 2 indicates column
+meanwidth = mean(mat1,3); % 3 indicates z-dimension
+
+maxrow = max(mat1,[],1);
+maxcol = max(mat1,[],2);
+maxwidth = max(mat1,[],3);
+
+%% 8 
+% Creating NaNs
+val1 = 'string'/0; %Inf
+val2 = 0/0; % NaN
+val3 = Inf*0; % NaN
+
+%% 9 
+% Troubleshooting for NaNs
+v  = [1 0 0 1 NaN 1 NaN 0];
+%max(v) % no disruptions
+%sum(v,"omitnan") % add "omitnan" flag
+mean(v, "omitnan")
+
+%% 10 
+% Generate a random sequence of even numbers between 10 and 20 using
+% randperm
+evenNum = 10:2:20; 
+rand_evens = randperm(length(evenNum))
+
+

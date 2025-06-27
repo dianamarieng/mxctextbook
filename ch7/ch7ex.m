@@ -45,3 +45,17 @@ end % ends row loop
 % Edits made from initial code
 % Repetitive code in each if-else statement is moved outside of the code 
 % disp was changed to fprintf
+
+%% 4 
+% Fix Tim's code 
+mat4 = -5:1.1:6;
+for i = 1:length(mat4)
+    if mod(i,2) == 0
+        mat4(i) = mat4(i)^2; 
+    end
+end
+disp(mat4)
+
+%% 5 FLAG 
+% Idk how to initialize a matrix in the loop 
+

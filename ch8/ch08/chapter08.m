@@ -132,13 +132,14 @@ while ~feof(fid) % feof tests whether we're at the end of the file.
     % cut this string of characters into a cell array in which elements of
     % the array are separated by tabs.
     % See next cell for more examples using regexp.
+    disp(dataline)
     
     % here we use strcmpi to compare strings. The "i" means to ignore case.
-    if ~any(strcmpi('trial',dataline))
+    if ~any(strcmpi('trial',dataline)) %~ means not
         continue % continue means to skip to the next iteration of the loop.
     end
     
-    trial_column    = find(strcmpi('trial',   dataline));
+    trial_column    = find(strcmpi('trial',   dataline)); % finds the index of the header
     choice_column   = find(strcmpi('choice',  dataline));
     rt_column       = find(strcmpi('rt',      dataline));
     accuracy_column = find(strcmpi('accuracy',dataline));

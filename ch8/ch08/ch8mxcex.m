@@ -38,3 +38,16 @@ while ~feof(fid)
 end
 fclose(fid);
 behavioral_data = behavioral_data(any(behavioral_data,2),:);
+
+%% 3 CSV Read 
+%data = csvread('somedata.csv');
+mat3 = 10 + (35-10).*rand(4,4);
+csvwrite('randomNumbers.csv',mat3);
+
+%% 4 For Loop 
+allFiles = dir; 
+for i = 1:length(allFiles) 
+    if allFiles(i).isdir == 1 
+        newDir(i) = allFiles(i);
+    end
+end

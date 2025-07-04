@@ -51,3 +51,31 @@ for i = 1:length(allFiles)
         newDir(i) = allFiles(i);
     end
 end
+
+%% 5 sscanf 
+disp('str2double')
+tic
+for i = 1:1000000
+    str2double(string(i));
+end
+toc
+
+disp('sscanf')
+tic
+for i = 1:1000000
+    sscanf(string(i),'%f');
+end
+toc
+
+%% 6 
+% data = dlmwrite('datafile',M)
+% have to loop over fi 
+
+%% 7 FLAG
+var4fname = 'name';
+var1 = 2; 
+varB = 4;
+save('var4fname','var1','varB');
+% var4fname without strings output to the .mat file named var4name, while
+% 'var4name' creates a new one?
+

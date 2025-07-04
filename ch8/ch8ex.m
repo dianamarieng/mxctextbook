@@ -18,12 +18,16 @@ allFiles = dir;
 % [all.isdir] means an array of folders. all([all.isdir]) means the
 % indices that are all true. = [] makes the directory that is true into
 % empty arrays 
-% THe second statement 
+% THe second statement makes an array of just files in all 
 
-% Test alla
+% Test 
 allFiles = dir; 
 allFiles = allFiles(3:end); % eliminates elements '.' and '..' 
 fileIndex = [allFiles.isdir] == 0; %0 indicates that it is a file, 
 % hence the array is a set of indices that indicate the position of the
 % files 
-allFiles = allFiles(fileIndex); % This makes allFiles into an array that only contains files in the current directory 
+allFiles = allFiles(fileIndex); % This makes allFiles into an array that only contains files in the current directory
+
+% I worked on the 1st question, I switched into the ch08 folder to work on
+% the previous exercises since the questions in this exercise are dependent
+% on the files in ch08

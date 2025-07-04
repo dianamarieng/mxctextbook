@@ -13,3 +13,6 @@ allFiles = dir;
 %and ".." the directory higher 
 
 %% 8 Exercises
+
+%1
+% Yes, because the first line specifies that everything 

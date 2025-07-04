@@ -79,3 +79,4 @@ save('var4fname','var1','varB');
 % var4fname without strings output to the .mat file named var4name, while
 % 'var4name' creates a new one?
 
+%% 8 Yes, the semicolons

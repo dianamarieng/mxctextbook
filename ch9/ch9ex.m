@@ -37,3 +37,17 @@ shading interp
 rotate3d
 
 %% 9.10 Text in plots
+for i = 1:1000
+    text(rand,rand,'Yo!')
+end
+
+%% 9.14 Exercises
+
+%% 1
+pic = imread('saturn.png');
+contour(pic(:,:,1),10,'linecolor','r')
+
+%% 2
+figure
+plot([0 cos(pi/3)],[0 sin(pi/3)])
+line([0 cos(pi/4)],[0 sin(pi/4)])

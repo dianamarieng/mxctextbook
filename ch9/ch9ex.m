@@ -60,3 +60,27 @@ close figure
 figure 
 line([0 cos(pi/4)],[0 sin(pi/4)]) % line stays?
 plot([0 cos(pi/3)],[0 sin(pi/3)])
+
+%% 3 Patches 
+figure
+x = [1 2 3 4 3 2 1];
+y = [9 9 7 4 1 3 2];
+patchFig = patch(x,y,'m');
+patchFig.EdgeColor = 'b';
+
+%% 4 
+randImg = round(255*rand(800,600,3));
+imagesc(randImg);
+% imagesc can only take an mxnx3 matrix
+
+%% 5 
+ri = randn(10);
+%pcolor skips the last row and column of the matrix
+% each cell is a filled polygon
+%pcolor treats the last row and column as points 
+subplot(121), pcolor(ri) 
+subplot(122), imagesc(ri), axis xy
+
+%% 6 
+pic = imread('saturn.png');
+imagesc(pic)

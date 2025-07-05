@@ -46,8 +46,17 @@ end
 %% 1
 pic = imread('saturn.png');
 contour(pic(:,:,1),10,'linecolor','r')
+% changed 'none' to 'r' for color
 
 %% 2
 figure
+plot([0 cos(pi/3)],[0 sin(pi/3)],'Color','m')
+line([0 cos(pi/4)],[0 sin(pi/4)],'Color','m')
+% use set function to set x and y to go from -1 to +1
+set(gca,'xlim',[-1 +1]); 
+set(gca,'ylim',[-1 +1]);
+%open new figure and run second line before first line
+close figure 
+figure 
+line([0 cos(pi/4)],[0 sin(pi/4)]) % line stays?
 plot([0 cos(pi/3)],[0 sin(pi/3)])
-line([0 cos(pi/4)],[0 sin(pi/4)])

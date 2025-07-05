@@ -22,5 +22,18 @@ y = [9 9 7 4 1 3 2];
 patch(x(idx),y(idx),'r')
 
 %% 9.8 Images
-im = [1 3 4; 0 4 6];
-imagesc(im)
+pic = imread('saturn.png');
+colorchans = {'red';'green';'blue'};
+for chani = 1:3 
+    subplot(2,2,chani)
+    imagesc(pic(:,:,chani))
+    axis off 
+    set(gca,'clim',[0,255])
+    title([colorchans{chani} ' channel'])
+end
+
+surf(pic(:,:,1))
+shading interp
+rotate3d
+
+%% 9.10 Text in plots

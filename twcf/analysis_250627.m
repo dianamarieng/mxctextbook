@@ -3,7 +3,7 @@
 % Description: Plotting graphs for participant S0144
 
 % loading main experiment file
-load('twcf_cue_tex_det_fmri_BU_S0144_main_expt_20250515_135127.mat', 'data'); 
+% load('twcf_cue_tex_det_fmri_BU_S0144_main_expt_20250515_135127.mat', 'data'); 
 
 
 %% A plot of responses (discrimination & detection) to cueValidity 
@@ -76,3 +76,5 @@ figure
 plot(data.RT)
 ylabel("Response time")
 xlabel("Trial number?")
+
+

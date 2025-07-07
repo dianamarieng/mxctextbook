@@ -4,3 +4,34 @@
 % Analysis: 
 % S0148, S0002, S0151, S0097, S0004, S0144, S0018, S0108, S0153
 
+% List of subjects with completed tests 
+subID = readmatrix("subID.txt","Delimiter","\n","OutputType","string"); 
+
+% Task 1: Make a plot of average RT for all participants across blocks
+% 1) Make a loop to load RT across trials for each participant 
+% 2) Store data from each trial into corresponding blocks
+% 3) Make a table with blocks 1-20 for all participants and average RT for each block
+% 4) Plot average reaction time against block number with error bars
+
+% Task 2: Plot average RT across blocks for each participant.
+
+% Repeat Task 1 and 2 for line length
+
+% example directory: C:\Users\Diana Gamboa\OneDrive\Documents\GitHub\twcf\twcf_expt1_data_BU\twcf_cue_tex_det_fmri\S0144\main_expt
+filedir = dir("C:\Users\Diana Gamboa\OneDrive\Documents\GitHub\twcf\twcf_expt1_data_BU\twcf_cue_tex_det_fmri\");
+
+% example file name:
+% twcf_cue_tex_det_fmri_BU_S0004_main_expt_20250501_094222.mat
+filename = "twcf_cue_tex_det_fmri_BU_*_main_expt_*.mat";
+% initialize empty data table containing block numbers & average RT
+blockN = 20; % Block number
+% FLAG: Is it better t
+data = [(1:blockN)',zeros(blockN,1)]; 
+
+% Loop through directory for each participant 
+for fi = 1:length(subID)
+    data(
+
+
+
+

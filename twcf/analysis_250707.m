@@ -6,4 +6,57 @@
 
 % List of subjects with completed tests 
 subID = readmatrix("subID.txt","Delimiter","\n","OutputType","string"); 
+
+% Task 1: Make a plot of average RT for all participants across blocks
+% 1) Make a loop to load RT across trials for each participant 
+% 2) Store data from each trial into corresponding blocks
+% 3) Make a table with blocks 1-20 for all participants and average RT for each block
+% 4) Plot average reaction time against block number with error bars
+
+% Task 2: Plot average RT across blocks for each participant.
+
+% Repeat Task 1 and 2 for line length
+
 % example directory: C:\Users\Diana Gamboa\OneDrive\Documents\GitHub\twcf\twcf_expt1_data_BU\twcf_cue_tex_det_fmri\S0144\main_expt
+filedir = dir("C:\Users\Diana Gamboa\OneDrive\Documents\GitHub\twcf\twcf_expt1_data_BU\twcf_cue_tex_det_fmri\");
+
+% example file name:
+% twcf_cue_tex_det_fmri_BU_S0004_main_expt_20250501_094222.mat
+filename = "twcf_cue_tex_det_fmri_BU_*_main_expt_*.mat";
+% initialize empty data table containing block numbers & average RT
+blockN = 20; % Block number
+% FLAG: Is it better to intialize as an array or as a structure?
+data = [(1:blockN)',zeros(blockN,1)]; 
+
+% 1) Loop through directory for each participant. 
+% 2) Within this loop, add the reaction time of the participant into a temp
+% array representing one block 
+% 3) Once all reaction times are stored in the block, average the reaction
+% times and put into 'data' array 
+% FLAG: Is there some better way to access data from participants
+% FLAG: Should I average the average of participants or just average the raw data?
+for fi = 1:length(subID)
+
+end
+
+function meanRT = calculateMeanRT(input)
+idx = data.stimID_postcue>0 & data.cueValidity==-1;
+val = data.correctDis(idx);
+mean(val)
+
+% Calculating mean RT of block 1 vs 20
+for iBlock = 1:max(data.i_block)
+    idx = data.i_block==iBlock;
+    val = data.RT(idx);
+    meanRT(iBlock) = mean(val,'omitnan');
+end
+
+end
+
+
+
+    
+
+
+
+

@@ -47,11 +47,18 @@ for fi = 1:length(subID)
     dataTable = calculateSumRT(data.i_block,data.RT,dataTable);
     % dataTable(blockIDX,2) = dataTable(blockIDX,2) + sumRT; % adds sumRT to RT across subjects
 end
-dataTable = dataTable(:,dataTable(:,2)/1600);
+dataTable(:,2) = dataTable(:,2)/(80*9);
+figure
+x = dataTable(:,1); 
+y = dataTable(:,2);
+plot(x,y)
+xlabel('block')
+ylabel('RT (ms)')
 disp(dataTable)
 
 function dataT = calculateSumRT(i_block,RT,dataT)
     for i = 1:max(i_block)
+        counter = 0;
         idx = i_block==i; % finds indices with the current block number
         val = RT(idx); % val is an array with all the RT values in this block 
         dataT(i,2) = dataT(i,2)+sum(val,"omitnan");

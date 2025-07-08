@@ -1,5 +1,5 @@
 % Started: 7/7/2025
-% Last edited: 7/8/2025
+% Last edited: 7/6/202
 % Description: More analysis on TWCF data 
 % Analysis: 
 % S0148, S0002, S0151, S0097, S0004, S0144, S0018, S0108, S0153
@@ -44,37 +44,27 @@ for fi = 1:length(subID)
     % the folder is in
     load([fileDirName{1}(1:110) fileName],"data");
     % loop through each block and generates block 
-    dataTable = calculateSumRT(data,dataTable);
+    dataTable = calculateSumRT(data.i_block,data.RT,dataTable);
     % dataTable(blockIDX,2) = dataTable(blockIDX,2) + sumRT; % adds sumRT to RT across subjects
 end
 dataTable(:,2) = dataTable(:,2)/(80*9);
-
-% Reaction Time Plot
 figure
 x = dataTable(:,1); 
 y = dataTable(:,2);
 plot(x,y)
 xlabel('block')
-ylabel('average RT (ms)')
+ylabel('RT (ms)')
 disp(dataTable)
 
-
-function dataT = calculateSumRT(data,dataT)
-% Description: calculates the total sum reaction time across all subjects
-% and updates the data table 
-% Inputs: structure data contains the loaded data subject's RT, dataT is a
-% matrix of average RT against block number 
-% Ouput: dataT is updated with new total sum 
-    for i = 1:max(data.i_block)
-        idx = data.i_block==i; % finds indices with the current block number
-        val = data.RT(idx); % val is an array with all the RT values in this block 
+function dataT = calculateSumRT(i_block,RT,dataT)
+    for i = 1:max(i_block)
+        idx = i_block==i; % finds indices with the current block number
+        val = RT(idx); % val is an array with all the RT values in this block 
         dataT(i,2) = dataT(i,2)+sum(val,"omitnan");
     end
 end
-
     
 
 % FLAG: 
-% 1) How do I take the average from all participants? Does "omitnan" change
-% the RT to zero? How would I account for removing the trials that are
-% NaNs?
+% 1) How do I take the average from all participats? Wouldn't "omitnan"
+% change it to zero?

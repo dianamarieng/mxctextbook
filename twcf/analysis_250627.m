@@ -14,7 +14,7 @@ y = data.cueValidity;
 % Calculating  the mean of valid and invalid trials
 idx = data.stimID_postcue>0 & data.cueValidity==-1;
 val = data.correctDis(idx);
-mean(val)
+mean(val) % calculates the probability
 
 % Calculating mean RT of block 1 vs 20
 for iBlock = 1:max(data.i_block)

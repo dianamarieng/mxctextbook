@@ -4,9 +4,6 @@
 % Analysis: 
 % S0148, S0002, S0151, S0097, S0004, S0144, S0018, S0108, S0153
 
-% List of subjects with completed tests 
-subID = readmatrix("subID.txt","Delimiter","\n","OutputType","char"); 
-
 % Task 1: Make a plot of average RT for all participants across blocks 
 % 1) Make a loop to load RT across trials for each participant 
 % 2) Store data from each trial into corresponding blocks
@@ -24,7 +21,11 @@ fileSampleDir = 'C:\Users\Diana Gamboa\OneDrive\Documents\GitHub\twcf\twcf_expt1
 
 blockN = 20; % Block number
 % FLAG: Is it better to intialize as an array or as a structure?
+
+% List of subjects with completed tests 
+subID = readmatrix("subID.txt","Delimiter","\n","OutputType","char"); 
 dataTable = [(1:blockN)',zeros(blockN,1)]; 
+
 
 % 1) Loop through directory for each participant. 
 % 2) Within this loop, add the reaction time of the participant into a temp
@@ -44,16 +45,16 @@ for fi = 1:length(subID)
     load([fileDirName{1}(1:110) fileName],"data");
     % loop through each block and generates block 
     dataTable = calculateSumRT(data.i_block,data.RT,dataTable);
-    disp(dataTable)
     % dataTable(blockIDX,2) = dataTable(blockIDX,2) + sumRT; % adds sumRT to RT across subjects
 end
+dataTable = dataTable(:,dataTable(:,2)/1600);
 disp(dataTable)
 
 function dataT = calculateSumRT(i_block,RT,dataT)
     for i = 1:max(i_block)
         idx = i_block==i; % finds indices with the current block number
         val = RT(idx); % val is an array with all the RT values in this block 
-        % dataT(i,2) = dataT(i,2)+sum(val,"omitnan");
+        dataT(i,2) = dataT(i,2)+sum(val,"omitnan");
     end
 end
     

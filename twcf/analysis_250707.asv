@@ -5,9 +5,9 @@
 % S0148, S0002, S0151, S0097, S0004, S0144, S0018, S0108, S0153
 
 % List of subjects with completed tests 
-subID = readmatrix("subID.txt","Delimiter","\n","OutputType","string"); 
+subID = readmatrix("subID.txt","Delimiter","\n","OutputType","char"); 
 
-% Task 1: Make a plot of average RT for all participants across blocks
+% Task 1: Make a plot of average RT for all participants across blocks 
 % 1) Make a loop to load RT across trials for each participant 
 % 2) Store data from each trial into corresponding blocks
 % 3) Make a table with blocks 1-20 for all participants and average RT for each block
@@ -17,20 +17,47 @@ subID = readmatrix("subID.txt","Delimiter","\n","OutputType","string");
 
 % Repeat Task 1 and 2 for line length
 
-% example directory: C:\Users\Diana Gamboa\OneDrive\Documents\GitHub\twcf\twcf_expt1_data_BU\twcf_cue_tex_det_fmri\S0144\main_expt
-filedir = dir("C:\Users\Diana Gamboa\OneDrive\Documents\GitHub\twcf\twcf_expt1_data_BU\twcf_cue_tex_det_fmri\");
+% File Directory Format
+% Sample file directory: C:\Users\Diana
+% Gamboa\OneDrive\Documents\GitHub\twcf\twcf_expt1_data_BU\twcf_cue_tex_det_fmri\S0004\main_expt\twcf_cue_tex_det_fmri_BU_S0004_main_expt_20250501_094222.mat
+fileSampleDir = 'C:\Users\Diana Gamboa\OneDrive\Documents\GitHub\twcf\twcf_expt1_data_BU\twcf_cue_tex_det_fmri\S0000\main_expt\twcf_cue_tex_det_fmri_BU_S0000_main_expt_*_*.mat';
 
-% example file name:
-% twcf_cue_tex_det_fmri_BU_S0004_main_expt_20250501_094222.mat
-filename = "twcf_cue_tex_det_fmri_BU_*_main_expt_*.mat";
-% initialize empty data table containing block numbers & average RT
 blockN = 20; % Block number
-% FLAG: Is it better t
-data = [(1:blockN)',zeros(blockN,1)]; 
+% FLAG: Is it better to intialize as an array or as a structure?
+dataTable = [(1:blockN)',zeros(blockN,1)]; 
 
-% Loop through directory for each participant 
+% 1) Loop through directory for each participant. 
+% 2) Within this loop, add the reaction time of the participant into a temp
+% array representing one block 
+% 3) Once all reaction times are stored in the block, average the reaction
+% times and put into 'data' array 
+% FLAG: Is there some better way to access data from participants
+% FLAG: Should I average the average of participants or just average the raw data?
 for fi = 1:length(subID)
-    data(
+    % replaces S0000 in sample file directory string with actual subject ID
+    fileDirName = strrep(fileSampleDir,'S0000',subID(fi));
+    % gets name of file in subject ID folder
+    fileName = dir(string(fileDirName)).name; % janky, how to fix?
+    % load data of subject
+    % fileDirName 1:110 is the name of the directory
+    % the folder is in
+    load([fileDirName{1}(1:110) fileName],"data");
+    % loop through each block 
+    [blockIDX, sumRT] = calculateSumRT(data.i_block,data.RT);
+    disp([subID(fi) num2str(sumRT)])
+    dataTable(blockIDX,2) = dataTable(blockIDX,2) + sumRT; % adds sumRT to to
+end
+disp(dataTable)
+
+function [blockIDX, sumRT]= calculateSumRT(i_block,RT)
+    for i = 1:max(i_block)
+        idx = i_block==i; % finds indices with the current block number
+        val = RT(idx); % val is an array with all the RT values in this block 
+        sumRT = sum(val,"omitnan"); 
+        blockIDX = i; 
+    end
+end
+    
 
 
 

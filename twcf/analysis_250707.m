@@ -40,8 +40,7 @@ for fi = 1:length(subID)
     % gets name of file in subject ID folder
     fileName = dir(string(fileDirName)).name; % janky, how to fix?
     % load data of subject
-    % fileDirName 1:110 is the name of the directory
-    % the folder is in
+    % fileDirName 1:110 is the name of the directory folder is in
     load([fileDirName{1}(1:110) fileName],"data");
     % loop through each block and generates block 
     dataTable = calculateSumRT(data,dataTable);

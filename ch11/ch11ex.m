@@ -19,3 +19,6 @@ plot3(time,real(csw),imag(csw))
 % signalX(fi) = sum(fSine.*signal);
 % end
 % signalX = signalX / N;
+% nyquist = srate/2;
+% hz = linspace(0,nyquist,N/2+1);
+% hz = (0:1/srate:N/2+1)*nyquist;

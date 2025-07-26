@@ -32,8 +32,6 @@ for fi = 1:length(subID)
     
 end
 
-subTable = cell2table(subCell(2:end,:));
-subTable
 
 %%
 %Reaction Time Plot

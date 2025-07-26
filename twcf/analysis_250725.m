@@ -15,8 +15,7 @@
 fileSampleDir = 'C:\Users\Diana Gamboa\OneDrive\Documents\GitHub\twcf\twcf_expt1_data_BU\twcf_cue_tex_det_fmri\S0000\main_expt\twcf_cue_tex_det_fmri_BU_S0000_main_expt_*_*.mat';
 blockN = 20; 
 subID = readmatrix("subID.txt","Delimiter","\n","OutputType","char"); 
-subCell = cell(blockN,length(subID)+1); % initializes subject Cells
-subCell(2:blockN+1,1) = num2cell(1:blockN); % Rows 2 onwards contains block data, first row is reserved for subject ID name
+subArray = zeros(blockN, length(subID)+1); % each column corresponds to subject data, each row corresponds to block number
 
 
 % Updating subjectDataT
@@ -27,27 +26,27 @@ for fi = 1:length(subID)
     fileName = dir(string(fileDirName)).name; % janky, how to fix?
     % load data of subject, fileDirName 1:110 is the name of the directory folder is in
     load([fileDirName{1}(1:110) fileName],"data");
-    subCell(1,fi+1) = subID(fi); % assigns subject ID numbers to first row of cell
-    subCell = calculateAverageRT(data,subCell,fi+1); % fi+1 is the column position of the subject data since subject data is shifted to the right 
-    
+    subArray = calculateAverageRT(data,subArray,fi);
 end
+subArray(:,length(subID)+1) = mean(subArray,2);
 
-subTable = cell2table(subCell(2:end,:));
-subTable
+% Making a table with block Numbers & corresponding subject IDs
+subTable = array2table(subArray,"VariableNames",subID);
 
-%%
+
 %Reaction Time Plot
-% figure
-% x = [1:blockN];
-% 
-% plot(x,y)
-% xlabel('block')
-% ylabel('average RT (ms)')
-% disp(dataTable)
+figure
+x = 1:blockN; 
+y = subArray;
+plot(x,y)
+xlabel('block')
+ylabel('average RT (ms)')
+xlim([1 blockN])
+legend(subID)
 
 %% calculate RT average
 
-function subCell = calculateAverageRT(data, subCell, subCol)
+function subArray = calculateAverageRT(data, subArray, subCol)
 % Desc: Calculates average RT per block for each subject & updates subject
 % cell
 % Input: data is a structure containing RT from the raw TWCF subject data file
@@ -55,7 +54,7 @@ function subCell = calculateAverageRT(data, subCell, subCol)
         idx = data.i_block==blocki; % finds indices with the current block number
         val = data.RT(idx); % val is an array with all the RT values in this block 
         avg = mean(val,'omitnan'); % computes average RT of block
-        subCell{blocki+1,subCol} = avg; % block number is shifted one downards
+        subArray(blocki,subCol) = avg;
     end
 end
 

@@ -31,18 +31,23 @@ end
 subArray(:,length(subID)+1) = mean(subArray,2);
 
 % Making a table with block Numbers & corresponding subject IDs
-subTable = array2table(subArray,"VariableNames",subID);
+subjectIDStr = readlines("subID.txt"); 
+header = [subjectIDStr',"Average"];
+subTable = array2table(subArray,"VariableNames",header);
 
 
 %Reaction Time Plot
 figure
 x = 1:blockN; 
 y = subArray;
-plot(x,y)
+hold on
+plot(x,y(:,1:length(subID)),'LineWidth',0.2);
+plot(x,y(:,length(subID)+1),'--','LineWidth',4);
+hold off
 xlabel('block')
 ylabel('average RT (ms)')
 xlim([1 blockN])
-legend(subID)
+legend(header)
 
 %% calculate RT average
 

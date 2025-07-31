@@ -3,7 +3,7 @@
 % Description: Plotting graphs for participant S0144
 
 % loading main experiment file
-% load('twcf_cue_tex_det_fmri_BU_S0144_main_expt_20250515_135127.mat', 'data'); 
+load('twcf_cue_tex_det_fmri_BU_S0144_main_expt_20250515_135127.mat', 'data'); 
 
 
 %% A plot of responses (discrimination & detection) to cueValidity 
@@ -12,9 +12,9 @@ x2 = data.respDet;
 y = data.cueValidity; 
  
 % Calculating  the mean of valid and invalid trials
-idx = data.stimID_postcue>0 & data.cueValidity==-1;
+idx = data.stimID_postcue>0 & data.cueValidity==1;
 val = data.correctDis(idx);
-mean(val) % calculates the probability
+mean(val); % calculates the probability
 
 % Calculating mean RT of block 1 vs 20
 for iBlock = 1:max(data.i_block)

@@ -13,7 +13,7 @@ lineN = 5; % numer of available line lengths
 subID = readmatrix("subID.txt","Delimiter","\n","OutputType","char"); 
 RTArray = zeros(blockN, length(subID)+1); % each column corresponds to subject data, each row corresponds to block number
 disArray = zeros(2, length(subID)+1); % row 1: Valid trial, row2: Invalid trials. Rows show probability of correct discrimination 
-lineArray = zeros(lineN*2, length(subID)+2); % first 5 rows: Valid trials, each row corresponds to line length. next 5 rows: Invalid trials 
+lineArray = zeros(lineN*2, length(subID)+1); % first 5 rows: Valid trials, each row corresponds to line length. next 5 rows: Invalid trials 
 
 
 % Updating subjectDataT
@@ -31,11 +31,10 @@ for fi = 1:length(subID)
     %Line array 
     lineArray = calculateLine(data,lineArray,fi);
 end
-% could probably make this into a function; and also change length(subID)
-% into size of the array -1
+% could probably make this into a function
 RTArray(:,length(subID)+1) = mean(RTArray,2); % calculate average RT across participants for each block
 disArray(:,length(subID)+1) = mean(disArray,2);
-lineArray(:,length(subID)+2) = mean(lineArray,2);
+lineArray(:,length(subID)+)
 
 %% Making a table with block Numbers & corresponding subject IDs
 subjectIDStr = readlines("subID.txt"); 
@@ -62,13 +61,3 @@ y = disArray;
 bar(x,disArray)
 ylabel('Probability of correct discrimination')
 legend('Valid','Invalid')
-
-%% Bar Plot for line length
-x = 1:5;
-valid   = lineArray(1:5,end);
-invalid = lineArray(6:10,end);
-Y = [valid invalid];
-bar(x, Y, 'grouped');
-xlabel('Line length');
-ylabel('p(correct discrimination)');
-legend({'Valid','Invalid'});
